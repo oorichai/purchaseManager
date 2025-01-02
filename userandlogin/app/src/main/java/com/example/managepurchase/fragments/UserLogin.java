@@ -112,7 +112,7 @@ public class UserLogin extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "Login successful", Toast.LENGTH_LONG).show();
-                            appointmentRepository.getUserById(email, new UserCallBack() {
+                            appointmentRepository.getUserByEmail(email, new UserCallBack() {
                                 @Override
                                 public void onUserRetrieved(User user) {
                                     sharedViewModel.setUser(user);

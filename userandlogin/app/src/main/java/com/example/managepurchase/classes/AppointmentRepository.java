@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -28,16 +29,27 @@ public class AppointmentRepository {
         database.child(providerId).child(key).setValue(appointment);
     }
 
-    public void getUserById(String email, UserCallBack callback) {
-        usersTable.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getUserByEmail(String email, UserCallBack callback) {
+        if (email == null || email.isEmpty()) {
+            callback.onError("Email is null or empty.");
+            return;
+        }
+
+        Query query = usersTable.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.getChildrenCount() > 0) {
                     DataSnapshot userSnapshot = dataSnapshot.getChildren().iterator().next();  // Take the first match
                     User user = userSnapshot.getValue(User.class);  // Convert to User class
-                    callback.onUserRetrieved(user);  // Pass the user to the callback
+                    if (user != null) {
+                        callback.onUserRetrieved(user);
+                        System.out.println("User retrieved successfully!");
+                    } else {
+                        callback.onError("User data is null or could not be parsed.");
+                    }
                 } else {
-                    callback.onError("No user found with UID: " + email);
+                    callback.onError("No user found with email: " + email);
                 }
             }
 
