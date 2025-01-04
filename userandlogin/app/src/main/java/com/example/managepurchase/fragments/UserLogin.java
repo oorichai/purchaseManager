@@ -75,7 +75,7 @@ public class UserLogin extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         mAuth=FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        appointmentRepository = new AppointmentRepository();
+        appointmentRepository = new AppointmentRepository(this);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -116,7 +116,7 @@ public class UserLogin extends Fragment {
                                 @Override
                                 public void onUserRetrieved(User user) {
                                     sharedViewModel.setUser(user);
-                                    Navigation.findNavController(view).navigate(R.id.action_userLogin_to_userManage);
+                                    Navigation.findNavController(view).navigate(R.id.action_userLogin_to_userManage2);
                                 }
                                 @Override
                                 public void onError(String errorMessage) {

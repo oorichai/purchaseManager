@@ -1,8 +1,10 @@
 package com.example.managepurchase.classes;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.managepurchase.Interface.UserCallBack;
 import com.google.firebase.database.DataSnapshot;
@@ -18,10 +20,13 @@ import java.util.Map;
 public class AppointmentRepository {
     private DatabaseReference database;
     private DatabaseReference usersTable;
+    private Fragment fragment;
+
     private User user = null;
-    public AppointmentRepository() {
+    public AppointmentRepository(Fragment fragment) {
         database = FirebaseDatabase.getInstance().getReference("appointments");
         usersTable = FirebaseDatabase.getInstance().getReference("users");
+        this.fragment=fragment;
     }
 
     public void addAppointment(String providerId, Appointment appointment) {
@@ -84,25 +89,30 @@ public class AppointmentRepository {
     }
     public void saveDate(String date, String time, User user) {
         // Reference to the specific date and time in the database
-        DatabaseReference appointmentRef = database.child("appointments").child(date).child(time);
+        DatabaseReference appointmentRef = database.child(date).child(time);
+        Context context = fragment.getContext();
         appointmentRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DataSnapshot snapshot = task.getResult();
                 if (snapshot.exists()) {
-                    System.out.println("This appointment is already taken.");
+                    Toast.makeText(context, "This appointment is already taken.", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Appointment appointment = new Appointment(user, time, date);
                     appointmentRef.setValue(appointment).addOnCompleteListener(saveTask -> {
                         if (saveTask.isSuccessful()) {
-                            System.out.println("Succeeded to save the appointment.");
+                            Toast.makeText(context, "Succeeded to save the appointment.", Toast.LENGTH_SHORT).show();
+
                         } else {
-                            System.out.println("Failed to save the appointment.");
+                            Toast.makeText(context, "Failed to save the appointment.", Toast.LENGTH_SHORT).show();
+
                         }
                     });
                 }
             } else {
-                // טיפול בשגיאה בבדיקה
-                System.out.println("Failed to check appointment availability: " + task.getException().getMessage());
+                Toast.makeText(context, "Failed to check appointment availability:."+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+
             }
         });
     }

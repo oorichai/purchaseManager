@@ -7,17 +7,14 @@ public class User {
         private String email;
         private String password;
         private String phone;
-        private String providerID;
-
         private String userId;
 
         // Constructor
-        public User(String name, String email, String password, String phone, String serviceProviderNumber, String userId) {
+        public User(String name, String email, String password, String phone, String userId) {
             this.name = name;
             this.email = email;
             this.password = password;
             this.phone = phone;
-            this.providerID = serviceProviderNumber;
             this.userId = userId;
         }
 
@@ -44,9 +41,6 @@ public class User {
             return phone;
         }
 
-        public String getServiceProviderNumber() {
-            return providerID;
-        }
 
         // Setters
         public void setName(String name) {
@@ -68,9 +62,7 @@ public class User {
             this.phone = phone;
         }
 
-        public void setServiceProviderNumber(String serviceProviderNumber) {
-            this.providerID = serviceProviderNumber;
-        }
+
 
         // toString Method
         @Override
@@ -79,7 +71,6 @@ public class User {
                     "name='" + name + '\'' +
                     ", email='" + email + '\'' +
                     ", phone='" + phone + '\'' +
-                    ", serviceProviderNumber='" + providerID + '\'' +
                     ", userId='" + userId + '\'' +
                     '}';
         }

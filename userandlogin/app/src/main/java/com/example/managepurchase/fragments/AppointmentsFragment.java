@@ -51,7 +51,7 @@ public class AppointmentsFragment extends Fragment {
             TextView selectedDateTextView = view.findViewById(R.id.selectedDate);
             selectedDateTextView.setText(selectedDate);
         });
-        appointmentRepository = new AppointmentRepository();
+        appointmentRepository = new AppointmentRepository(this);
         return view = inflater.inflate(R.layout.fragment_appointments, container, false);
     }
 
@@ -63,7 +63,12 @@ public class AppointmentsFragment extends Fragment {
         btnBookAppointment = view.findViewById(R.id.btnBookAppointment);
         progressBar = view.findViewById(R.id.progressBar);
 
-        btnBookAppointment.setOnClickListener(v -> bookAppointment());
+        btnBookAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookAppointment();
+            }
+        });
     }
 
     private void bookAppointment() {
@@ -74,12 +79,12 @@ public class AppointmentsFragment extends Fragment {
                 return;
             }
 
-            // שליפת השעה מה-TimePicker
             int hour = timePicker.getHour();
             int minute = timePicker.getMinute();
             String time = String.format("%02d:%02d", hour, minute);
             User currentUser = sharedViewModel.getUser().getValue();
             appointmentRepository.saveDate(date, time,currentUser);
+
     }
 
 }

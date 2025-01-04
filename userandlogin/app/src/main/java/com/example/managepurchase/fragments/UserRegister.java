@@ -89,7 +89,7 @@ public class UserRegister extends Fragment {
         EditText phoneEditText = view.findViewById(R.id.editTextPhoneNumber);
         String phone = phoneEditText.getText().toString().trim();
         CheckBox checkBox= view.findViewById(R.id.checkBoxAdmin);
-        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        AppointmentRepository appointmentRepository = new AppointmentRepository(this);
 
         if (email.isEmpty()) {
             Toast.makeText(getContext(), "Please enter an email", Toast.LENGTH_LONG).show();
@@ -124,7 +124,7 @@ public class UserRegister extends Fragment {
             Toast.makeText(getContext(), "Please enter a provider / or tour the provider and enter providerID", Toast.LENGTH_LONG).show();
             return;
         }
-        user = new User(name, email, password, phone, provider, mAuth.getUid());
+        user = new User(name, email, password, phone, mAuth.getUid());
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override

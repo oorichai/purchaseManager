@@ -13,18 +13,10 @@
             android:id="@+id/action_userLogin_to_userRegister"
             app:destination="@id/userRegister" />
         <action
-            android:id="@+id/action_userLogin_to_userManage"
+            android:id="@+id/action_userLogin_to_userManage2"
             app:destination="@id/userManage" />
     </fragment>
-    <fragment
-        android:id="@+id/userManage"
-        android:name="com/example/managepurchase/fragments/UserManage"
-        android:label="fragment_user_manage"
-        tools:layout="@layout/fragment_user_manage" >
-        <action
-            android:id="@+id/action_userManage_to_appointmentsFragment"
-            app:destination="@id/appointmentsFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/userRegister"
         android:name="com.example.managepurchase.fragments.UserRegister"
@@ -40,7 +32,15 @@
         android:label="AppointmentsFragment"
         tools:layout="@layout/fragment_appointments" >
         <action
-            android:id="@+id/action_appointmentsFragment_to_userManage"
+            android:id="@+id/action_appointmentsFragment_to_userManage2"
             app:destination="@id/userManage" />
     </fragment>
+    <fragment
+        android:id="@+id/userManage"
+        android:name="com.example.managepurchase.fragments.UserManage"
+        android:label="UserManage"
+        tools:layout ="@layout/fragment_user_manage"/>
+        <action
+            android:id="@+id/action_userManage_to_appointmentsFragment"
+            app:destination="@id/appointmentsFragment" />
 </navigation>
