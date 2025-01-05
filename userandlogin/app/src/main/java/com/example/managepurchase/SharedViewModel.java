@@ -24,7 +24,12 @@ public class SharedViewModel extends AndroidViewModel {
     public LiveData<User> getUser() {
         return userLiveData;
     }
-
+    public boolean getIfUserAdmin() {
+        if (userLiveData.getValue() != null) {
+            return userLiveData.getValue().isAdmin();
+        }
+        return false;
+    }
     public void setDate(String date) {
         dateLiveData.setValue(date);
     }

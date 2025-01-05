@@ -8,6 +8,7 @@ public class User {
         private String password;
         private String phone;
         private String userId;
+        private boolean isAdmin = false;
 
         // Constructor
         public User(String name, String email, String password, String phone, String userId) {
@@ -60,6 +61,12 @@ public class User {
 
         public void setPhone(String phone) {
             this.phone = phone;
+        }
+        public boolean isAdmin() {
+            return isAdmin;
+        }
+        public void setAdmin(boolean admin) {
+            isAdmin = admin;
         }
 
 

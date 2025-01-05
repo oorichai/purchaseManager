@@ -11,6 +11,12 @@ public class Appointment {
             this.date = date;
             this.time = time;
             }
+        public Appointment() {
+            this.user = new User();
+            this.date = "";
+            this.time = "";
+        }
+
 
         // Getters
         public User getUser() {

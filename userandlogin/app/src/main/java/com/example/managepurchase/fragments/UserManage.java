@@ -20,6 +20,7 @@ import com.example.managepurchase.Adapter.AppointmentAdapter;
 import com.example.managepurchase.R;
 import com.example.managepurchase.SharedViewModel;
 import com.example.managepurchase.classes.Appointment;
+import com.example.managepurchase.classes.AppointmentRepository;
 import com.example.managepurchase.classes.User;
 import com.example.managepurchase.classes.item_Data;
 
@@ -40,6 +41,7 @@ public class UserManage extends Fragment {
     private SharedViewModel sharedViewModel;
     private ArrayList<Appointment> appointmentList;
     private View view;
+    AppointmentRepository appointmentRepository;
     private String mParam1;
     private String mParam2;
     private static final String ARG_PARAM2 = "param2";
@@ -75,7 +77,7 @@ public class UserManage extends Fragment {
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         appointmentList = new ArrayList<>();
         adapter = new AppointmentAdapter(appointmentList, sharedViewModel); // Use existing adapter
-        appointmentList.add(new Appointment(new User("John Doe", "t@.t.com", "123456", "1234567899", "123456789"), "2025-01-03", "10:00 AM"));
+        appointmentRepository = new AppointmentRepository(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -89,22 +91,16 @@ public class UserManage extends Fragment {
         view =  inflater.inflate(R.layout.fragment_user_manage, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         CalendarView calendarView = view.findViewById(R.id.calendarView);
         Button btnNext = view.findViewById(R.id.btnOpenFragmentApoointments);
         final String[] selectedDate = {""};
         calendarView.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             selectedDate[0] = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
+            appointmentRepository.getAppointments(selectedDate[0],adapter);
 
-            ArrayList<Appointment> filteredAppointments = new ArrayList<>();
-            for (Appointment appointment : appointmentList) {
-                if (appointment.getDate().equals(selectedDate[0])) {
-                    filteredAppointments.add(appointment);
-                }
-            }
-            adapter.updateAppointments(filteredAppointments);
         });
+
         btnNext.setOnClickListener(v -> {
             if (!selectedDate[0].isEmpty()) {
                 sharedViewModel.setDate(selectedDate[0]);
@@ -113,6 +109,7 @@ public class UserManage extends Fragment {
                 Toast.makeText(getContext(), "בחר תאריך לפני המעבר", Toast.LENGTH_SHORT).show();
             }
         });
+        recyclerView.setAdapter(adapter);
     return view;
     }
 }

@@ -67,17 +67,6 @@
         android:hint="phone"
         android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/providerID"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/edit_text_style"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="your provider" />
-
     <CheckBox
         android:id="@+id/checkBoxAdmin"
         android:layout_width="match_parent"

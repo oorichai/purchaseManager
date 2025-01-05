@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.managepurchase.Adapter.AppointmentAdapter;
 import com.example.managepurchase.Interface.UserCallBack;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,8 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class AppointmentRepository {
@@ -69,8 +69,10 @@ public class AppointmentRepository {
         database.child(providerId).child(appointmentId).updateChildren(updates);
     }
 
-    public void deleteAppointment(String providerId, String appointmentId) {
-        database.child(providerId).child(appointmentId).removeValue();
+    public void deleteAppointment(String date, String time) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("appointments").child(date).child(time);
+        databaseReference.child(time).removeValue();
+        Toast.makeText(fragment.getContext(), "Appointment deleted successfully.", Toast.LENGTH_SHORT).show();
     }
     public void uploadUser(User user) {
         String userId = user.getUserId();
@@ -98,7 +100,7 @@ public class AppointmentRepository {
                     Toast.makeText(context, "This appointment is already taken.", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Appointment appointment = new Appointment(user, time, date);
+                    Appointment appointment = new Appointment(user, date, time);
                     appointmentRef.setValue(appointment).addOnCompleteListener(saveTask -> {
                         if (saveTask.isSuccessful()) {
                             Toast.makeText(context, "Succeeded to save the appointment.", Toast.LENGTH_SHORT).show();
@@ -117,18 +119,33 @@ public class AppointmentRepository {
         });
     }
 
-//    public void getAppointments(String providerId, DataCallback callback) {
-//        database.child(providerId).get().addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                Map<String, Appointment> appointments = new HashMap<>();
-//                task.getResult().getChildren().forEach(snapshot -> {
-//                    Appointment appointment = snapshot.getValue(Appointment.class);
-//                    appointments.put(snapshot.getKey(), appointment);
-//                });
-//                callback.onDataLoaded(appointments);
-//            } else {
-//                callback.onDataError(task.getException());
-//            }
-//        });
-//    }
+    public void getAppointments(String selectedDate, AppointmentAdapter adapter) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("appointments").child(selectedDate);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Appointment> filteredAppointments = new ArrayList<>();
+
+                for (DataSnapshot timeSlotSnapshot : snapshot.getChildren()) {
+                    Appointment appointment = timeSlotSnapshot.getValue(Appointment.class);
+
+                    if (appointment != null && appointment.isAvailable()) {
+                        filteredAppointments.add(appointment);
+                    }
+                }
+
+                if (!filteredAppointments.isEmpty()) {
+                    adapter.updateAppointments(filteredAppointments);
+                } else {
+                    adapter.updateAppointments(new ArrayList<>());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(fragment.getContext(), "שגיאה בטעינת הפגישות.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 }

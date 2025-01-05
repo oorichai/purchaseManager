@@ -80,8 +80,6 @@ public class UserRegister extends Fragment {
         String email = emailEditText.getText().toString().trim();
         EditText nameEditText = view.findViewById(R.id.NameOfClient);
         String name = nameEditText.getText().toString();
-        EditText providerEditText = view.findViewById(R.id.providerID);
-        String provider = providerEditText.getText().toString();
         EditText passwordEditText = view.findViewById(R.id.editTextPasswordfirstTime);
         String password = passwordEditText.getText().toString();
         EditText passwordEditText2 = view.findViewById(R.id.editTextPasswordSecoundTime);
@@ -120,11 +118,12 @@ public class UserRegister extends Fragment {
             Toast.makeText(getContext(), "Phone number is not valid", Toast.LENGTH_LONG).show();
             return;
         }
-        if (provider.isEmpty()&&!checkBox.isChecked()) {
-            Toast.makeText(getContext(), "Please enter a provider / or tour the provider and enter providerID", Toast.LENGTH_LONG).show();
-            return;
-        }
+
         user = new User(name, email, password, phone, mAuth.getUid());
+        if (checkBox.isChecked()) {
+            user.setAdmin(true);
+        }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override

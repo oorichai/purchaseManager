@@ -34,8 +34,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="זמן תור : "
-            android:textSize="14sp"
-            android:textColor="@android:color/holo_blue_dark"/>
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="51dp"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
