@@ -39,8 +39,17 @@
         android:id="@+id/userManage"
         android:name="com.example.managepurchase.fragments.UserManage"
         android:label="UserManage"
-        tools:layout ="@layout/fragment_user_manage"/>
+        tools:layout ="@layout/fragment_user_manage">
+        <action
+            android:id="@+id/action_userManage_to_edit_appointment"
+            app:destination="@id/edit_appointment" />
+    </fragment>
         <action
             android:id="@+id/action_userManage_to_appointmentsFragment"
             app:destination="@id/appointmentsFragment" />
+    <fragment
+        android:id="@+id/edit_appointment"
+        android:name="com.example.managepurchase.fragments.edit_appointment"
+        android:label="fragment_edit_appointment"
+        tools:layout="@layout/fragment_edit_appointment" />
 </navigation>

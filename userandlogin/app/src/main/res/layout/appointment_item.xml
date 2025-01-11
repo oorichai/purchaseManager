@@ -38,10 +38,14 @@
             android:textSize="14sp" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="50dp"
-            android:layout_height="51dp"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
+            android:id="@+id/overflowMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:layout_gravity="right"
+            android:src="@drawable/baseline_more_vert_24" />
 
 
     </LinearLayout>

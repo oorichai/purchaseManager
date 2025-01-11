@@ -2,16 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/loginphoto"
     android:orientation="vertical"
-    android:background="#F0F0E9"
-    tools:context=".fragments.UserLogin" >
+    tools:context=".fragments.UserLogin">
 
     <EditText
         android:id="@+id/editTextTextEmail"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="200dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_text_style"
         android:ems="10"
@@ -37,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/custom_button_background"
         android:gravity="center"
         android:text="Login" />
@@ -46,7 +48,7 @@
         android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-
+        android:layout_marginLeft="150dp"
         android:background="@drawable/custom_button_background"
         android:gravity="center"
         android:text="Register" />
