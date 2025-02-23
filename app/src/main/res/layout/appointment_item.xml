@@ -1,0 +1,52 @@
+<!-- Layout for each appointment item in the RecyclerView -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/clientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="שם הלקוח :"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/clientPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="מספר טלפון :"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="זמן תור : "
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/overflowMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:layout_gravity="right"
+            android:src="@drawable/baseline_more_vert_24" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
