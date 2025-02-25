@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "51534751979",
+    "project_id": "managepurchase-dd2a6",
+    "storage_bucket": "managepurchase-dd2a6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51534751979:android:b127abbad23ece9cb836ae",
+        "android_client_info": {
+          "package_name": "com.example.managepurchase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKKN2LiTq7theS8fFrozdVxv8Uo8WKSE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

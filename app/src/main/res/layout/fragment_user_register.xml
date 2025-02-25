@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_background"
+    android:orientation="vertical"
+    tools:context=".fragments.UserRegister">
+
+    <EditText
+        android:id="@+id/emailRegister"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="E -mail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/NameOfClient"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextPasswordfirstTime"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextPasswordSecoundTime"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="password verifyed"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_style"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="phone"
+        android:inputType="textEmailAddress" />
+
+    <CheckBox
+        android:id="@+id/checkBoxAdmin"
+        android:layout_width="85dp"
+        android:layout_height="53dp"
+        android:background="@drawable/edit_text_style"
+        android:text="Admin" />
+
+    <Button
+        android:id="@+id/registrationButton"
+        android:layout_width="127dp"
+        android:layout_height="62dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_background"
+        android:text="Register"
+        android:textColor="@color/edit_text_background_color" />
+
+    <Button
+        android:id="@+id/BackToLoginFragButton"
+        android:layout_width="127dp"
+        android:layout_height="58dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_background"
+
+        android:text="Login"
+        android:textColor="@color/edit_text_background_color" />
+</LinearLayout>
